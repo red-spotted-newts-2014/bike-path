@@ -9,6 +9,7 @@
 #import "SearchMapViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <MapKit/MapKit.h>
+#import "AFNetworking.h"
 
 @interface SearchMapViewController ()
 
@@ -24,8 +25,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-        NSLog(@"yo");
     
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
     request.naturalLanguageQuery = @"222 Fulton Street New York NY";
@@ -62,6 +61,8 @@
     self.mapView.delegate = self;
 //
 //    mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
