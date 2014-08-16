@@ -10,7 +10,5 @@
 #import <GoogleMaps/GoogleMaps.h>
 
 @implementation ResultsMapViewController
-- (void) helloFunc {
-NSLog(@"yo");
-};
+
 @end
