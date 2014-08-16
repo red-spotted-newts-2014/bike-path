@@ -10,6 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <MapKit/MapKit.h>
 #import "AFNetworking.h"
+#import "Example.h"
 
 @interface SearchMapViewController ()
 
@@ -68,6 +69,10 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
+    
+    int ret = [[[SampleClass alloc] init] max:1 andNum2:10];
+    NSLog(@"Max value is : %d\n", ret );
+
 }
 
 - (void)didReceiveMemoryWarning
