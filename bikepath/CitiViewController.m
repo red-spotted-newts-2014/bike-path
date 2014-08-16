@@ -2,13 +2,14 @@
 //  CitiViewController.m
 //  bikepath
 //
-//  Created by Apprentice on 8/15/14.
+//  Created by Vivek George, Molly Huerster, Farheen Malik and Armen Vartan on 8/15/14.
 //  Copyright (c) 2014 Bike Path. All rights reserved.
 //
 
 #import "CitiViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <MapKit/MapKit.h>
+#import <Foundation/Foundation.h>
 
 @implementation CitiViewController
 
@@ -42,26 +43,35 @@
              NSDictionary *greeting = [NSJSONSerialization JSONObjectWithData:data
                                                                       options:0
                                                                         error:NULL];
-             //             NSLog(@"%@", greeting);
-             //             NSLog(@"%@", [greeting objectForKey:@"stationBeanList"]);
              NSArray* stations = [greeting objectForKey:@"stationBeanList"];
              for(id st in stations) {
                  NSDictionary *station = (NSDictionary *)st;
-                 NSString *lati = [station objectForKey:@"latitude"];
-                 NSString *longi = [station objectForKey:@"longitude"];
-                 NSString *title = [station objectForKey:@"stationName"];
-                 MKMapItem *item;
+                 NSString *lati             = [station objectForKey:@"latitude"];
+                 NSString *longi            = [station objectForKey:@"longitude"];
+                 NSString *title            = [station objectForKey:@"stationName"];
+                 NSString *availableBikes   = [[station objectForKey:@"availableBikes"] stringValue];
+                 
                  GMSMarker *citiMarker = [[GMSMarker alloc] init];
-                 citiMarker.position= CLLocationCoordinate2DMake([lati doubleValue], [longi doubleValue]);
-                 //                 NSDouble *latitude = [[station objectForKey:@"latitude"]];
-                 //                 NSLog(@"%@", [report.latitude = [latitude doubleValue]]);
-                 //                 CLLocationCoordinate2DMake([[station objectForKey:[@"latitude" ] doubleValue], [[station objectForKey:[@"longitude" ] doubleValue]);
-                 NSLog(@"%@", [station objectForKey:@"latitude"]);
-                 citiMarker.title = item.name;
-                 citiMarker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
+                 
+                 citiMarker.position = CLLocationCoordinate2DMake([lati doubleValue], [longi doubleValue]);
+                 citiMarker.title    = title;
+                 citiMarker.map      = self.mapView;
+
+                 NSLog(@"%@", [station objectForKey:@"availableBikes"]);
+                 NSNumber *num = @([[station objectForKey:@"availableBikes"] intValue]);
+                 
+                 CLLocation *location = [[CLLocation alloc] initWithLatitude:[lati doubleValue] longitude:[longi doubleValue]];
+                 NSMutableArray *locations = [[NSMutableArray alloc] init];
+                 [locations addObject:location];
+                 
+                 if ([num intValue] > 0) {
+                     citiMarker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+                     citiMarker.snippet  = availableBikes;
+                 } else {
+                     citiMarker.icon = [GMSMarker markerImageWithColor:[UIColor redColor]];
+                     citiMarker.snippet = @"No bikes availabe at this location.";
+                 };
                  citiMarker.map = self.mapView;
-//                 NSLog(@"latitude = %f", item.placemark.location.coordinate.latitude);
-//                 NSLog(@"longitude = %f", item.placemark.location.coordinate.longitude);
              }
          }
      }];

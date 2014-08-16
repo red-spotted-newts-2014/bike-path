@@ -12,7 +12,7 @@
                         <viewControllerLayoutGuide type="top" id="gkH-hp-aio"/>
                         <viewControllerLayoutGuide type="bottom" id="doY-Pr-8J5"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iVa-G1-NWu">
+                    <view key="view" contentMode="scaleToFill" id="iVa-G1-NWu" customClass="GMSMapView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -29,11 +29,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="iVa-G1-NWu" id="Wg6-Kz-Xb5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ijX-LB-Qyj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="G0S-6X-bg1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-478" y="115"/>
+            <point key="canvasLocation" x="758" y="-677"/>
         </scene>
         <!--Citi View Controller-->
         <scene sceneID="hFY-af-fca">
@@ -54,7 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VOW-IA-NOJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="22" y="115"/>
+            <point key="canvasLocation" x="-312" y="75"/>
         </scene>
         <!--Search Map View Controller - BikePath Search-->
         <scene sceneID="uBy-pW-Yuz">
@@ -111,7 +114,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="apk-eL-f0g"/>
+                    <navigationItem key="navigationItem" id="apk-eL-f0g">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="Zbg-N4-Qjh">
+                            <connections>
+                                <segue destination="StR-Yi-Gvc" kind="push" id="LmC-ZQ-9e3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchField" destination="ogR-Xi-9rc" id="78f-tN-53C"/>
                     </connections>
@@ -143,6 +152,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Vr-Od-Qim" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="IJY-3D-axd"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="F9F-1x-1DX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -154,7 +164,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n3m-z3-45D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-965" y="115"/>
+            <point key="canvasLocation" x="357" y="-683"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -162,4 +172,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Qqs-Ze-qwa"/>
+    </inferredMetricsTieBreakers>
 </document>

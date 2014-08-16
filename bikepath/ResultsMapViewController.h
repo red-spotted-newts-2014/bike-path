@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GoogleMaps/GoogleMaps.h>
 
-@interface ResultsMapViewController : UIViewController
+@interface ResultsMapViewController : UIViewController <GMSMapViewDelegate>
+@property (strong, nonatomic) IBOutlet GMSMapView *mapView;
 
 - (IBAction)unwindToSearchPage:(UIStoryboardSegue *)segue;
+
 
 @end

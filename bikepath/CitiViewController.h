@@ -2,7 +2,7 @@
 //  CitiViewController.h
 //  bikepath
 //
-//  Created by Apprentice on 8/15/14.
+//  Created by Vivek George, Molly Huerster, Farheen Malik and Armen Vartan on 8/15/14.
 //  Copyright (c) 2014 Bike Path. All rights reserved.
 //
 

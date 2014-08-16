@@ -2,7 +2,7 @@
 //  bikepathTests.m
 //  bikepathTests
 //
-//  Created by Farheen Malik on 8/14/14.
+//  Created by Vivek George, Molly Huerster, Farheen Malik and Armen Vartan on 8/14/14.
 //  Copyright (c) 2014 Bike Path. All rights reserved.
 //
 
