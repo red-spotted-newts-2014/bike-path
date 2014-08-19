@@ -10,6 +10,7 @@
 #import "SPGooglePlacesAutocomplete.h"
 #import <UIKit/UIKit.h>
 #import "SearchItem.h"
+#import "ResultsMapViewController.h"
 
 @interface GoogleAutocompleteTestViewController ()
 
@@ -22,9 +23,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    NSLog(@"initWithCoder");
     if (self) {
-        NSLog(@"hello");
         searchQuery = [[SPGooglePlacesAutocompleteQuery alloc] initWithApiKey:@"AIzaSyAxaqfMyyc-WSrvsWP_jF2IUaTZVjkMlFo"];
         shouldBeginEditing = YES;
     }
@@ -32,28 +31,29 @@
 }
 
 - (void)viewDidLoad {
-    NSLog(@"inviewDidLoad");
+//    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController setNavigationBarHidden:TRUE];
     self.searchDisplayController.searchBar.placeholder = @"Search or Address";
+    
+    GMSCameraPosition *nyc = [GMSCameraPosition cameraWithLatitude:40.706638
+                                                         longitude:-74.009070
+                                                              zoom:12
+                                                           bearing:30
+                                                        viewingAngle:45];
+    self.mapView.mapType = kGMSTypeNormal;
+    [self.mapView setCamera:nyc];
+    self.mapView.myLocationEnabled = YES;
+    self.mapView.settings.compassButton = YES;
+    self.mapView.settings.myLocationButton = YES;
+    self.mapView.settings.zoomGestures = YES;
+//    self.mapView.delegate = self;
+    
 }
 
 - (void)viewDidUnload {
     [self setMapView:nil];
     [super viewDidUnload];
 }
-
-
-//- (IBAction)recenterMapToUserLocation:(id)sender {
-//    MKCoordinateRegion region;
-//    MKCoordinateSpan span;
-//    
-//    span.latitudeDelta = 0.02;
-//    span.longitudeDelta = 0.02;
-//    
-//    region.span = span;
-//    region.center = self.mapView.userLocation.coordinate;
-//    
-//    [self.mapView setRegion:region animated:YES];
-//}
 
 #pragma mark -
 #pragma mark UITableViewDataSource
@@ -81,28 +81,6 @@
 #pragma mark -
 #pragma mark UITableViewDelegate
 
-- (void)recenterMapToPlacemark:(CLPlacemark *)placemark {
-    MKCoordinateRegion region;
-    MKCoordinateSpan span;
-    
-    span.latitudeDelta = 0.02;
-    span.longitudeDelta = 0.02;
-    
-    region.span = span;
-    region.center = placemark.location.coordinate;
-    
-//    [self.mapView setRegion:region];
-}
-
-- (void)addPlacemarkAnnotationToMap:(CLPlacemark *)placemark addressString:(NSString *)address {
-//    [self.mapView removeAnnotation:selectedPlaceAnnotation];
-    
-    selectedPlaceAnnotation = [[MKPointAnnotation alloc] init];
-    selectedPlaceAnnotation.coordinate = placemark.location.coordinate;
-    selectedPlaceAnnotation.title = address;
-//    [self.mapView addAnnotation:selectedPlaceAnnotation];
-}
-
 - (void)dismissSearchControllerWhileStayingActive {
     // Animate out the table view.
     NSTimeInterval animationDuration = 0.3;
@@ -119,30 +97,64 @@
     SPGooglePlacesAutocompletePlace *place = [self placeAtIndexPath:indexPath];
     [place resolveToPlacemark:^(CLPlacemark *placemark, NSString *addressString, NSError *error) {
         if (error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not map selected Place"
-                                                            message:error.localizedDescription
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not map selected place"
+            message:error.localizedDescription
+            delegate:nil
+            cancelButtonTitle:@"OK"
+            otherButtonTitles:nil, nil];
             [alert show];
         } else if (placemark) {
-            SearchItem *selectedItem   = [[SearchItem alloc] init];
-            selectedItem.searchQuery   = place.name;
-            NSLog(@"%@", place);
-            NSLog(@"%@", addressString);
-            NSLog(@"%@", placemark);
+            NSString *address = addressString;
+            NSArray *addressItems = [address componentsSeparatedByString:@" "];
+            NSMutableArray *addressCombinedArray = [[NSMutableArray alloc] init];
+            for (NSString *addressPart in addressItems){
+                [addressCombinedArray addObject:[[NSString alloc] initWithFormat:@"%@+", addressPart]];
+            }
+            NSString *addressCombinedString = [addressCombinedArray componentsJoinedByString:@""];
+            NSString *kGoogleGeocodeApiUrl = @"https://maps.googleapis.com/maps/api/geocode/json?address=";
+            NSString *kGoogleGeocodeApiKey = @"AIzaSyAxaqfMyyc-WSrvsWP_jF2IUaTZVjkMlFo";
+            NSString *addressForJson = [[NSString alloc] initWithFormat:@"%@%@&key=%@", kGoogleGeocodeApiUrl, addressCombinedString, kGoogleGeocodeApiKey];
             
-            NSLog(@"%@", selectedItem.searchQuery);
+            NSLog(@"%@", addressForJson);
             
-//            selectedItem.lati          = place.placemark.location.coordinate.latitude;
-//            selectedItem.longi         = item.placemark.location.coordinate.longitude;
-//            selectedItem.position      = CLLocationCoordinate2DMake(item.placemark.location.coordinate.latitude, item.placemark.location.coordinate.longitude);
-//            selectedItem.address       = item.placemark.thoroughfare;
-
-            [self addPlacemarkAnnotationToMap:placemark addressString:addressString];
-            [self recenterMapToPlacemark:placemark];
-            [self dismissSearchControllerWhileStayingActive];
-            [self.searchDisplayController.searchResultsTableView deselectRowAtIndexPath:indexPath animated:NO];
+            NSURL *url = [NSURL URLWithString: addressForJson];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            [NSURLConnection sendAsynchronousRequest:request
+                                               queue:[NSOperationQueue mainQueue]
+                                   completionHandler:^(NSURLResponse *response,
+                                                       NSData *data, NSError *connectionError)
+             {
+                 if (data.length > 0 && connectionError == nil)
+                 {
+                    NSDictionary *addressJson = [NSJSONSerialization
+                                                JSONObjectWithData:data
+                                                options:0
+                                                error:NULL];
+                     
+//                    NSArray *addressParts = [[addressJson objectForKey:@"results"] valueForKey:@"geometry"];
+                      NSArray *addressParts = [addressJson objectForKey:@"results"];
+                     
+                     for (id x in addressParts) {
+                         NSLog(@"%@", x);
+                     }
+                    NSString *formattedAddress = [addressParts valueForKey:@"formatted_address"];
+                     for(id info in addressParts){
+                        NSDictionary *addressPartsLocation = (NSDictionary *)[info valueForKey:@"location"];
+                         NSString *lati = [addressPartsLocation objectForKey:@"lat"];
+                         NSString *longi = [addressPartsLocation objectForKey:@"lng"];
+                         CLLocation *location = [[CLLocation alloc] initWithLatitude:[lati doubleValue] longitude:[longi doubleValue]];
+                         SearchItem *selectedItem   = [[SearchItem alloc] init];
+                         selectedItem.searchQuery   = place.name;
+                         selectedItem.lati = location.coordinate.latitude;
+                         selectedItem.longi = location.coordinate.longitude;
+                         selectedItem.address = formattedAddress;
+                         [self performSegueWithIdentifier: @"showResults" sender: selectedItem];
+                         [self dismissSearchControllerWhileStayingActive];
+                         [self.searchDisplayController.searchResultsTableView deselectRowAtIndexPath:indexPath animated:NO];
+                     }
+                 }
+             }];
+            
         }
     }];
 }
@@ -151,18 +163,14 @@
 #pragma mark UISearchDisplayDelegate
 
 - (void)handleSearchForSearchString:(NSString *)searchString {
-    
-    NSLog(@"%@", searchQuery);
-    
-//    searchQuery.location = self.mapView.userLocation.coordinate;
     searchQuery.input = searchString;
     [searchQuery fetchPlaces:^(NSArray *places, NSError *error) {
         if (error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch Places"
-                                                            message:error.localizedDescription
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch places"
+            message:error.localizedDescription
+            delegate:nil
+            cancelButtonTitle:@"OK"
+            otherButtonTitles:nil, nil];
             [alert show];
         } else {
             searchResultPlaces = places;
@@ -206,35 +214,15 @@
     return boolToReturn;
 }
 
-#pragma mark -
-#pragma mark MKMapView Delegate
 
-//- (MKAnnotationView *)mapView:(MKMapView *)mapViewIn viewForAnnotation:(id <MKAnnotation>)annotation {
-//    if (mapViewIn != self.mapView || [annotation isKindOfClass:[MKUserLocation class]]) {
-//        return nil;
-//    }
-//    static NSString *annotationIdentifier = @"SPGooglePlacesAutocompleteAnnotation";
-//    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
-//    if (!annotationView) {
-//        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationIdentifier];
-//    }
-//    annotationView.animatesDrop = YES;
-//    annotationView.canShowCallout = YES;
-//
-//    UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-//    [detailButton addTarget:self action:@selector(annotationDetailButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-//    annotationView.rightCalloutAccessoryView = detailButton;
-//    
-//    return annotationView;
-//}
-//
-//- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
-//    // Whenever we've dropped a pin on the map, immediately select it to present its callout bubble.
-//    [self.mapView selectAnnotation:selectedPlaceAnnotation animated:YES];
-//}
-//
-//- (void)annotationDetailButtonPressed:(id)sender {
-//    // Detail view controller application logic here.
-//}
+// segue to results page
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showResults"]) {
+        ResultsMapViewController *destViewController = segue.destinationViewController;
+        SearchItem *item = sender;
+        destViewController.item = item;
+        
+    }
+}
 
 @end

@@ -12,8 +12,54 @@
 
 @implementation AppDelegate
 
+@synthesize stationJSON = _stationJSON;
+
+- (NSArray*)loadCitiBikeData
+{
+    NSURL *url = [NSURL URLWithString:@"http://www.citibikenyc.com/stations/json"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url
+                                                           cachePolicy: NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval: 120.0];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request
+                          returningResponse:&response
+                                      error:&error];
+         if (data.length > 0 && error == nil)
+         {
+             NSDictionary *citiBikeJSON = [NSJSONSerialization JSONObjectWithData:data
+                                                                          options:0
+                                                                            error:NULL];
+             NSArray* stations = [citiBikeJSON objectForKey:@"stationBeanList"];
+             NSSortDescriptor *sortDescriptor;
+             sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"availableBikes"
+                                                          ascending:NO];
+             NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+             NSArray* sortedStations = [stations sortedArrayUsingDescriptors:sortDescriptors];
+             
+             _stationJSON = sortedStations;
+             NSLog(@"%@",_stationJSON);
+             
+             for(id st in sortedStations) {
+                 NSDictionary *station = (NSDictionary *)st;
+                 NSString *lati             = [station objectForKey:@"latitude"];
+                 NSString *longi            = [station objectForKey:@"longitude"];
+                 CLLocation *location = [[CLLocation alloc] initWithLatitude:[lati doubleValue] longitude:([longi doubleValue] *2)];
+                 NSMutableArray *locations = [[NSMutableArray alloc] init];
+                 [locations addObject:location];
+             }
+         }
+    NSLog(@"App Delegate: %@",_stationJSON);
+    return _stationJSON;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSURLCache *citiBikeCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
+                                                              diskCapacity:20 * 1024 * 1024
+                                                                  diskPath:nil];
+    [NSURLCache setSharedURLCache:citiBikeCache];
+        
     // background color of navigation bar
     UIColor * color = [UIColor colorWithRed:255/255.0f green:251/255.0f blue:246/255.0f alpha:1.0f];
     [[UINavigationBar appearance] setBarTintColor:color];
@@ -48,19 +94,11 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
+//- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+//{
+//    cacheBikeStations *cbs;
+//    [cbs loadAndCacheStations];
+//    return YES;
+//}
 @end
