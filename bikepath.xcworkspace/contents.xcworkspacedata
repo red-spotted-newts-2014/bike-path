@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:bikepath/GMSMarkerFactory.h">
+   </FileRef>
+   <FileRef
+      location = "group:bikepath/GMSMarkerFactory.m">
+   </FileRef>
+   <FileRef
       location = "group:bikepath.xcodeproj">
    </FileRef>
    <FileRef
