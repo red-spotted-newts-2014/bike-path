@@ -11,12 +11,12 @@
 
 @interface GMSMarkerFactory : NSObject
 
-+ (GMSMarker*)createGMSMarker:(CLLocationCoordinate2D) locationCoordinates
++ (GMSMarker*)createGMSMarker:(CLLocationCoordinate2D*) locationCoordinates
                       mapView:(GMSMapView*) map
                         title:(NSString*) title
                         color:(UIImage*) color;
 
-+ (GMSMarker*)createGMSMarkerForStation:(CLLocationCoordinate2D) locationCoordinates
++ (GMSMarker*)createGMSMarkerForStation:(CLLocationCoordinate2D*) locationCoordinates
                                 mapView:(GMSMapView*) map
                                   title:(NSString*) title
                        availableSnippet:(NSString*) availableSnippet

@@ -10,25 +10,25 @@
 #import <GoogleMaps/GoogleMaps.h>
 
 @implementation GMSMarkerFactory
-+ (GMSMarker*)createGMSMarker:(CLLocationCoordinate2D) locationCoordinates
++ (GMSMarker*)createGMSMarker:(CLLocationCoordinate2D*) locationCoordinates
                       mapView:(GMSMapView*) map
                         title:(NSString*) title
                         color:(UIColor*) color{
-    GMSMarker *marker = [GMSMarker markerWithPosition:locationCoordinates];
+    GMSMarker *marker = [GMSMarker markerWithPosition:*locationCoordinates];
     marker.title = title;
     marker.map = map;
     marker.icon = color;
     return marker;
 }
 
-+ (GMSMarker*)createGMSMarkerForStation:(CLLocationCoordinate2D) locationCoordinates
++ (GMSMarker*)createGMSMarkerForStation:(CLLocationCoordinate2D*) locationCoordinates
                       mapView:(GMSMapView*) map
                         title:(NSString*) title
              availableSnippet:(NSString*) availableSnippet
            unavailableSnippet:(NSString*) unavailableSnippet
                 numberOfBikes:(NSNumber*) numberOfBikes{
     
-    GMSMarker *marker = [GMSMarker markerWithPosition:locationCoordinates];
+    GMSMarker *marker = [GMSMarker markerWithPosition:*locationCoordinates];
     marker.title = title;
     marker.map = map;
     
