@@ -11,10 +11,11 @@
 		09F19F78199EF6F500825ADE /* CitiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F19F77199EF6F500825ADE /* CitiViewController.m */; };
 		09F19F7B199FB16600825ADE /* LaunchScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F19F7A199FB16600825ADE /* LaunchScreenViewController.m */; };
 		3A8BE839FF5A4487AABD6EB3 /* libPods-bikepath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F6EAA2E00741E89CD9CA83 /* libPods-bikepath.a */; };
+		80508A6D19A392A800B5DCED /* GMSMarkerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 80508A6C19A392A800B5DCED /* GMSMarkerFactory.m */; };
+		80508A7019A392C400B5DCED /* StationFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 80508A6F19A392C400B5DCED /* StationFinder.m */; };
 		8A02797B19A04DA200F3FFC7 /* SearchItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A02797A19A04DA200F3FFC7 /* SearchItemTableCell.m */; };
 		8A18221C199ED28D001D7AE2 /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A18221B199ED28D001D7AE2 /* SearchItem.m */; };
 		8A48A710199FC4420030F153 /* SearchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A48A70F199FC4420030F153 /* SearchListViewController.m */; };
-		8A73F13F19A0FA7F00F353F8 /* GooglePlacesAutocompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A73F13E19A0FA7F00F353F8 /* GooglePlacesAutocompleteViewController.m */; };
 		8AB03325199DAD8A0036FF7A /* SearchMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB03324199DAD8A0036FF7A /* SearchMapViewController.m */; };
 		8AB03328199DADA80036FF7A /* ResultsMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB03327199DADA80036FF7A /* ResultsMapViewController.m */; };
 		8AB0332A199DB2930036FF7A /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB03329199DB2930036FF7A /* GoogleMaps.framework */; };
@@ -69,14 +70,16 @@
 		09F19F7A199FB16600825ADE /* LaunchScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreenViewController.m; sourceTree = "<group>"; };
 		15F6EAA2E00741E89CD9CA83 /* libPods-bikepath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bikepath.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16236A47F48C4B6A876339DB /* Pods-bikepathTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bikepathTests.xcconfig"; path = "Pods/Pods-bikepathTests.xcconfig"; sourceTree = "<group>"; };
+		80508A6B19A392A800B5DCED /* GMSMarkerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSMarkerFactory.h; sourceTree = "<group>"; };
+		80508A6C19A392A800B5DCED /* GMSMarkerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSMarkerFactory.m; sourceTree = "<group>"; };
+		80508A6E19A392C400B5DCED /* StationFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationFinder.h; sourceTree = "<group>"; };
+		80508A6F19A392C400B5DCED /* StationFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationFinder.m; sourceTree = "<group>"; };
 		8A02797919A04DA200F3FFC7 /* SearchItemTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchItemTableCell.h; sourceTree = "<group>"; };
 		8A02797A19A04DA200F3FFC7 /* SearchItemTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchItemTableCell.m; sourceTree = "<group>"; };
 		8A18221A199ED28D001D7AE2 /* SearchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchItem.h; sourceTree = "<group>"; };
 		8A18221B199ED28D001D7AE2 /* SearchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchItem.m; sourceTree = "<group>"; };
 		8A48A70E199FC4420030F153 /* SearchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchListViewController.h; sourceTree = "<group>"; };
 		8A48A70F199FC4420030F153 /* SearchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchListViewController.m; sourceTree = "<group>"; };
-		8A73F13D19A0FA7F00F353F8 /* GooglePlacesAutocompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglePlacesAutocompleteViewController.h; sourceTree = "<group>"; };
-		8A73F13E19A0FA7F00F353F8 /* GooglePlacesAutocompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooglePlacesAutocompleteViewController.m; sourceTree = "<group>"; };
 		8AB03323199DAD8A0036FF7A /* SearchMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMapViewController.h; sourceTree = "<group>"; };
 		8AB03324199DAD8A0036FF7A /* SearchMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMapViewController.m; sourceTree = "<group>"; };
 		8AB03326199DADA80036FF7A /* ResultsMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsMapViewController.h; sourceTree = "<group>"; };
@@ -213,7 +216,11 @@
 		8AE403CB199D924200B926AB /* bikepath */ = {
 			isa = PBXGroup;
 			children = (
+				80508A6B19A392A800B5DCED /* GMSMarkerFactory.h */,
+				80508A6C19A392A800B5DCED /* GMSMarkerFactory.m */,
 				8ACFF70D19A25DC300FB1E09 /* MDDirectionService.h */,
+				80508A6E19A392C400B5DCED /* StationFinder.h */,
+				80508A6F19A392C400B5DCED /* StationFinder.m */,
 				8ACFF70E19A25DC300FB1E09 /* MDDirectionService.m */,
 				8AE403F4199D951100B926AB /* Main.storyboard */,
 				8AB03323199DAD8A0036FF7A /* SearchMapViewController.h */,
@@ -223,8 +230,6 @@
 				8AB03326199DADA80036FF7A /* ResultsMapViewController.h */,
 				8AB03327199DADA80036FF7A /* ResultsMapViewController.m */,
 				09F19F79199FB16600825ADE /* LaunchScreenViewController.h */,
-				8A73F13D19A0FA7F00F353F8 /* GooglePlacesAutocompleteViewController.h */,
-				8A73F13E19A0FA7F00F353F8 /* GooglePlacesAutocompleteViewController.m */,
 				09F19F7A199FB16600825ADE /* LaunchScreenViewController.m */,
 				8AE403D4199D924200B926AB /* AppDelegate.h */,
 				8AE403D5199D924200B926AB /* AppDelegate.m */,
@@ -442,9 +447,10 @@
 				09F19F78199EF6F500825ADE /* CitiViewController.m in Sources */,
 				8AE403D6199D924200B926AB /* AppDelegate.m in Sources */,
 				8AB03325199DAD8A0036FF7A /* SearchMapViewController.m in Sources */,
+				80508A6D19A392A800B5DCED /* GMSMarkerFactory.m in Sources */,
 				8A02797B19A04DA200F3FFC7 /* SearchItemTableCell.m in Sources */,
 				8A18221C199ED28D001D7AE2 /* SearchItem.m in Sources */,
-				8A73F13F19A0FA7F00F353F8 /* GooglePlacesAutocompleteViewController.m in Sources */,
+				80508A7019A392C400B5DCED /* StationFinder.m in Sources */,
 				0978B2E119A148E0007D9FAB /* GoogleAutocompleteTestViewController.m in Sources */,
 				8AE403D2199D924200B926AB /* main.m in Sources */,
 				09F19F7B199FB16600825ADE /* LaunchScreenViewController.m in Sources */,

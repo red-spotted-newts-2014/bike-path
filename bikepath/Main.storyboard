@@ -36,9 +36,9 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ijX-LB-Qyj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="G0S-6X-bg1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="464" y="-977"/>
+            <point key="canvasLocation" x="510" y="-953"/>
         </scene>
-        <!--Search Map View Controller - Stations Nearby-->
+        <!--Search Map View Controller - BikePath Search-->
         <scene sceneID="uBy-pW-Yuz">
             <objects>
                 <viewController id="nM0-WI-Oec" customClass="SearchMapViewController" sceneMemberID="viewController">
@@ -64,7 +64,7 @@
                     <navigationItem key="navigationItem" title="BikePath Search" id="EoJ-yJ-sBB">
                         <barButtonItem key="leftBarButtonItem" title="Other" id="Aq9-9Z-EkI">
                             <connections>
-                                <segue destination="Psq-1E-C2k" kind="modal" id="P28-GV-rTT"/>
+                                <segue destination="Psq-1E-C2k" kind="push" customClass="UIStoryboardPopoverSegue" id="P28-GV-rTT"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="FjH-MX-Uw3">
@@ -80,51 +80,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M7r-03-6kQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-491" y="-977"/>
+            <point key="canvasLocation" x="-611" y="-923"/>
         </scene>
-        <!--Google Places Autocomplete View Controller-->
-        <scene sceneID="Emy-P7-EaI">
-            <objects>
-                <viewController id="6Ty-Vv-Sfv" customClass="GooglePlacesAutocompleteViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0H1-sJ-x7w"/>
-                        <viewControllerLayoutGuide type="bottom" id="KAL-ow-Osm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ICa-aG-s9g">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xaq-S0-PaV">
-                                <rect key="frame" x="-2" y="68" width="327" height="506"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </mapView>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OE4-j8-mQy">
-                                <rect key="frame" x="0.0" y="24" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="mapView" destination="xaq-S0-PaV" id="6nF-56-ic8"/>
-                        <outlet property="searchDisplayController" destination="II0-aj-ML6" id="ttW-4T-Kns"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="T2C-PA-PxV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="II0-aj-ML6">
-                    <connections>
-                        <outlet property="delegate" destination="6Ty-Vv-Sfv" id="hAh-gU-b0M"/>
-                        <outlet property="searchBar" destination="OE4-j8-mQy" id="a8s-bO-C0x"/>
-                        <outlet property="searchContentsController" destination="6Ty-Vv-Sfv" id="2ya-qr-Gzi"/>
-                        <outlet property="searchResultsDataSource" destination="6Ty-Vv-Sfv" id="RFT-LA-hqV"/>
-                        <outlet property="searchResultsDelegate" destination="6Ty-Vv-Sfv" id="9Sa-bb-Iy5"/>
-                    </connections>
-                </searchDisplayController>
-            </objects>
-            <point key="canvasLocation" x="-476" y="-311"/>
-        </scene>
-        <!--Google Autocomplete Test View Controller - Title-->
+        <!--Google Autocomplete Test View Controller - Search-->
         <scene sceneID="5Zi-wm-dVQ">
             <objects>
                 <viewController id="Psq-1E-C2k" customClass="GoogleAutocompleteTestViewController" sceneMemberID="viewController">
@@ -133,40 +91,30 @@
                         <viewControllerLayoutGuide type="bottom" id="PA5-In-NpB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nC9-aF-gT6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NZ1-zz-rQX">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="Psq-1E-C2k" id="OH0-Bl-gfX"/>
                                 </connections>
                             </searchBar>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3KM-hY-iTs" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xt2-r6-gCh" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="108" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ogr-tt-ar1">
-                                        <rect key="frame" x="208" y="454" width="85" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.80000001192092896" green="1" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="14"/>
-                                        <state key="normal" title="My Location">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="JNG-ag-Ove"/>
+                    <navigationItem key="navigationItem" title="Search" id="JNG-ag-Ove"/>
                     <connections>
-                        <outlet property="mapView" destination="3KM-hY-iTs" id="GEL-8W-Xbn"/>
+                        <outlet property="mapView" destination="Xt2-r6-gCh" id="OvQ-Of-zTN"/>
                         <outlet property="searchDisplayController" destination="7f6-Ls-NCu" id="tsh-35-kYi"/>
+                        <segue destination="StR-Yi-Gvc" kind="push" identifier="showResults" id="Nlw-BY-fgj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ih9-KG-S8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -180,9 +128,9 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-47" y="-311"/>
+            <point key="canvasLocation" x="-11" y="-515"/>
         </scene>
-        <!--Search List View Controller-->
+        <!--Search List View Controller - Search-->
         <scene sceneID="JjR-Li-dwF">
             <objects>
                 <viewController id="vmW-OD-HOf" customClass="SearchListViewController" sceneMemberID="viewController">
@@ -235,7 +183,7 @@
                                         <connections>
                                             <outlet property="addressLabel" destination="eoy-DK-cgH" id="xtx-4v-ghE"/>
                                             <outlet property="nameLabel" destination="Xys-VG-fV5" id="Hcf-z5-7Zr"/>
-                                            <segue destination="StR-Yi-Gvc" kind="push" identifier="showResults" id="HYJ-FP-ZUY"/>
+                                            <segue destination="StR-Yi-Gvc" kind="push" identifier="showResults" id="bxq-HC-rED"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -252,7 +200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Shc-jA-DAW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-40" y="-977"/>
+            <point key="canvasLocation" x="-11" y="-1435"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ntl-jZ-pu8">
@@ -270,7 +218,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qVs-tJ-rn4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-943" y="-977"/>
+            <point key="canvasLocation" x="-1270" y="-933"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -278,4 +226,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="bxq-HC-rED"/>
+    </inferredMetricsTieBreakers>
 </document>

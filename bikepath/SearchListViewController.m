@@ -114,6 +114,7 @@
         
         ResultsMapViewController *destViewController = segue.destinationViewController;
         SearchItem *item = (SearchItem*)[self.searchResults objectAtIndex:indexPath.row];
+        NSLog(@"%@", item);
         destViewController.item = item;
 
     }

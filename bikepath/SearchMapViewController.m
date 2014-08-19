@@ -70,10 +70,10 @@
                  
                  if ([num intValue] > 0) {
                      citiMarker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
-                     citiMarker.snippet  = availableBikes;
+                     citiMarker.snippet  = [NSString stringWithFormat:@"Bicyles avaiable: %@", availableBikes];
                  } else {
                      citiMarker.icon = [GMSMarker markerImageWithColor:[UIColor redColor]];
-                     citiMarker.snippet = @"No bikes availabe at this location.";
+                     citiMarker.snippet = @"No bicyles availabe at this location.";
                  };
                  citiMarker.map = self.mapView;
              }
