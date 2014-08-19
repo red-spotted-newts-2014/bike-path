@@ -107,11 +107,12 @@
 
     // init a waypoints instance var, it's an array of markers not locations
     waypoints_ = [[NSMutableArray alloc]init];
+    waypointStrings_ = [[NSMutableArray alloc]init];
 
     // place a marker on the map at the current location of the phone
 //    NSDictionary *closestStation = [StationFinder findClosestStation:stations location:currentLocation];
     CLLocationCoordinate2D startPosition = locationManager.location.coordinate;
-    GMSMarker *startPoint = [GMSMarkerFactory createGMSMarker:startPosition
+    GMSMarker *startPoint = [GMSMarkerFactory createGMSMarker:&startPosition
                                                       mapView:mapView_
                                                         title:@"Start"
                                                         color:[GMSMarker markerImageWithColor:[UIColor redColor]]];
@@ -122,7 +123,7 @@
 
 
     CLLocationCoordinate2D createEndLocation = CLLocationCoordinate2DMake(self.item.lati, self.item.longi);
-    GMSMarker *endPoint = [GMSMarkerFactory createGMSMarker:createEndLocation
+    GMSMarker *endPoint = [GMSMarkerFactory createGMSMarker:&createEndLocation
                                                     mapView:mapView_
                                                       title:self.item.address //the address being given is not the full address
                                                       color:[GMSMarker markerImageWithColor:[UIColor redColor]]];
@@ -159,7 +160,7 @@
 
              NSNumber *numberOfBikes = @([[closestStation objectForKey:@"availableBikes"] intValue]);
 
-             GMSMarker *startStation  = [GMSMarkerFactory createGMSMarkerForStation:closestStationLocation
+             GMSMarker *startStation  = [GMSMarkerFactory createGMSMarkerForStation:&closestStationLocation
                                                                   mapView:mapView_
                                                                     title:[closestStation objectForKey:@"stationName"]
                                                          availableSnippet:@"Bicyles available"
@@ -177,7 +178,7 @@
 
              NSNumber *availableDocks = @([[closestStation objectForKey:@"availableDocks"] intValue]);
 
-             GMSMarker *endStation  = [GMSMarkerFactory createGMSMarkerForStation:closestEndStationLocation
+             GMSMarker *endStation  = [GMSMarkerFactory createGMSMarkerForStation:&closestEndStationLocation
                                                                 mapView:mapView_
                                                                   title:[closestEndStation objectForKey:@"stationName"]
                                                        availableSnippet:@"Docks available"
