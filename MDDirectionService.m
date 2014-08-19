@@ -7,10 +7,10 @@
 //
 
 #import "MDDirectionService.h"
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation MDDirectionService{
 @private
-    BOOL _sensor;
     BOOL _alternatives;
     NSURL *_directionsURL;
     NSArray *_waypoints;
@@ -20,7 +20,6 @@ static NSString *kMDDirectionsURL = @"http://maps.googleapis.com/maps/api/direct
 
 - (void)setDirectionsQuery:(NSDictionary *)query withSelector:(SEL)selector withDelegate:(id)delegate{
     NSArray *waypoints = [query objectForKey:@"waypoints"];
-//    NSString *sensor = [query objectForKey:@"sensor"]; //to remove if things test well
     NSMutableString *url =
     [NSMutableString stringWithFormat:@"%@&origin=%@&destination=%@&sensor=true&waypoints=%@|%@", kMDDirectionsURL, [waypoints objectAtIndex:0], [waypoints objectAtIndex:1], [waypoints objectAtIndex:2], [waypoints objectAtIndex:3]];
 

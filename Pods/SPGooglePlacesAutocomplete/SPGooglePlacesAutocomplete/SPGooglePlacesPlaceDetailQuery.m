@@ -36,6 +36,8 @@
     if (self.language) {
         [url appendFormat:@"&language=%@", self.language];
     }
+    NSLog(@"google string:%@", url);
+
     return url;
 }
 

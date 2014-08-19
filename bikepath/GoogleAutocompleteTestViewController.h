@@ -16,14 +16,10 @@
 {
     NSArray *searchResultPlaces;
     SPGooglePlacesAutocompleteQuery *searchQuery;
-    MKPointAnnotation *selectedPlaceAnnotation;
+//    MKPointAnnotation *selectedPlaceAnnotation;
     
     BOOL shouldBeginEditing;
 }
-//@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
-
-
-//@property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet GMSMapView *mapView;
 
 @end
