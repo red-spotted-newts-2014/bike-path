@@ -13,7 +13,6 @@
 		8A18221C199ED28D001D7AE2 /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A18221B199ED28D001D7AE2 /* SearchItem.m */; };
 		8A48A710199FC4420030F153 /* SearchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A48A70F199FC4420030F153 /* SearchListViewController.m */; };
 		8A53724319A44011002B4351 /* AddressGeocoderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A53724219A44011002B4351 /* AddressGeocoderFactory.m */; };
-		8A53724619A448D4002B4351 /* GeocodeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A53724519A448D4002B4351 /* GeocodeItem.m */; };
 		8AB03325199DAD8A0036FF7A /* SearchMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB03324199DAD8A0036FF7A /* SearchMapViewController.m */; };
 		8AB03328199DADA80036FF7A /* ResultsMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB03327199DADA80036FF7A /* ResultsMapViewController.m */; };
 		8AB0332A199DB2930036FF7A /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB03329199DB2930036FF7A /* GoogleMaps.framework */; };
@@ -74,8 +73,6 @@
 		8A48A70F199FC4420030F153 /* SearchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchListViewController.m; sourceTree = "<group>"; };
 		8A53724119A44011002B4351 /* AddressGeocoderFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressGeocoderFactory.h; sourceTree = "<group>"; };
 		8A53724219A44011002B4351 /* AddressGeocoderFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressGeocoderFactory.m; sourceTree = "<group>"; };
-		8A53724419A448D4002B4351 /* GeocodeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeocodeItem.h; sourceTree = "<group>"; };
-		8A53724519A448D4002B4351 /* GeocodeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeocodeItem.m; sourceTree = "<group>"; };
 		8AB03323199DAD8A0036FF7A /* SearchMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMapViewController.h; sourceTree = "<group>"; };
 		8AB03324199DAD8A0036FF7A /* SearchMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMapViewController.m; sourceTree = "<group>"; };
 		8AB03326199DADA80036FF7A /* ResultsMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsMapViewController.h; sourceTree = "<group>"; };
@@ -235,8 +232,6 @@
 				8A48A70F199FC4420030F153 /* SearchListViewController.m */,
 				0978B2DF19A148E0007D9FAB /* GoogleAutocompleteTestViewController.h */,
 				0978B2E019A148E0007D9FAB /* GoogleAutocompleteTestViewController.m */,
-				8A53724419A448D4002B4351 /* GeocodeItem.h */,
-				8A53724519A448D4002B4351 /* GeocodeItem.m */,
 				8A02797919A04DA200F3FFC7 /* SearchItemTableCell.h */,
 				8A02797A19A04DA200F3FFC7 /* SearchItemTableCell.m */,
 				8A18221A199ED28D001D7AE2 /* SearchItem.h */,
@@ -453,7 +448,6 @@
 				8AB03325199DAD8A0036FF7A /* SearchMapViewController.m in Sources */,
 				C2BA9C9619A40B7F00AB42E0 /* GMSMarkerFactory.m in Sources */,
 				8A02797B19A04DA200F3FFC7 /* SearchItemTableCell.m in Sources */,
-				8A53724619A448D4002B4351 /* GeocodeItem.m in Sources */,
 				8A18221C199ED28D001D7AE2 /* SearchItem.m in Sources */,
 				0978B2E119A148E0007D9FAB /* GoogleAutocompleteTestViewController.m in Sources */,
 				8AE403D2199D924200B926AB /* main.m in Sources */,

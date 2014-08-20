@@ -9,14 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "SPGooglePlacesAutocomplete.h"
 #import <UIKit/UIKit.h>
-#import "GeocodeItem.h"
 
 @interface AddressGeocoderFactory : NSObject
 
-//+ (GeocodeItem*) translateAddressToGeocodeObject:(NSString*)addressString;
 
-+ (NSString*)translateAddressToUrl:(NSString*)addressString;
-//
-+ (GeocodeItem*)translateUrlToGeocodedObject:(NSString*)url;
++ (NSString*)translateAddresstoUrl:(NSString*)addressString;
+
++ (NSMutableDictionary*)translateUrlToGeocodedObject:(NSString*)url;
 
 @end

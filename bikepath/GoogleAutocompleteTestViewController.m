@@ -106,64 +106,18 @@
             [alert show];
         } else if (placemark) {
             SearchItem *selectedItem   = [[SearchItem alloc] init];
-//            GeocodeItem *geocodedObject = [[GeocodeItem alloc] init];
-//            [AddressGeocoderFactory translateAddressToGeocodeObject:(NSString*)addressString];
-//            NSLog(@"%@", addressString);
-//            NSString *addressForJson = [AddressGeocoderFactory translateAddressToUrl:(NSString *)addressString];
-            
-//            NSLog(@"%@", geocodedObject);
-//            GeocodeItem *geocodedObject = [AddressGeocoderFactory translateUrlToGeocodedObject:(NSString*)url];
-//            geocodedObject.latitude;
-//            NSLog(@"geocoded object lat: %@", geocodedObject);
-            
-            NSString *address = addressString;
-            NSArray *addressItems = [address componentsSeparatedByString:@" "];
-            NSMutableArray *addressCombinedArray = [[NSMutableArray alloc] init];
-            for (NSString *addressPart in addressItems){
-                [addressCombinedArray addObject:[[NSString alloc] initWithFormat:@"%@+", addressPart]];
-            }
-            NSString *addressCombinedString = [addressCombinedArray componentsJoinedByString:@""];
-            NSString *kGoogleGeocodeApiUrl = @"https://maps.googleapis.com/maps/api/geocode/json?address=";
-            NSString *kGoogleGeocodeApiKey = @"AIzaSyAxaqfMyyc-WSrvsWP_jF2IUaTZVjkMlFo";
-            NSString *addressForJson = [[NSString alloc] initWithFormat:@"%@%@&key=%@", kGoogleGeocodeApiUrl, addressCombinedString, kGoogleGeocodeApiKey];
-//
-            NSURL *url = [NSURL URLWithString: addressForJson];
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            [NSURLConnection sendAsynchronousRequest:request
-                                               queue:[NSOperationQueue mainQueue]
-                                   completionHandler:^(NSURLResponse *response,
-                                                       NSData *data, NSError *connectionError)
-             {
-                 if (data.length > 0 && connectionError == nil)
-                 {
-                    NSDictionary *addressJson = [NSJSONSerialization
-                                                JSONObjectWithData:data
-                                                options:0
-                                                error:NULL];
-                     
-                    NSArray *addressParts = [[addressJson objectForKey:@"results"] valueForKey:@"geometry"];
-                     
-                    NSString *formattedAddress = [addressParts valueForKey:@"formatted_address"];
-                     for(id info in addressParts){
-                        NSDictionary *addressPartsLocation = (NSDictionary *)[info valueForKey:@"location"];
-//                     for (id x in addressPartsLocation){
-//                         NSLog(@"%@", x);
-//                     }
-                         NSString *lati = [addressPartsLocation objectForKey:@"lat"];
-                         NSString *longi = [addressPartsLocation objectForKey:@"lng"];
-                         CLLocation *location = [[CLLocation alloc] initWithLatitude:[lati doubleValue] longitude:[longi doubleValue]];
-                         selectedItem.searchQuery   = place.name;
-                         selectedItem.lati = location.coordinate.latitude;
-                         selectedItem.longi = location.coordinate.longitude;
-                         selectedItem.position = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
-                         selectedItem.address = formattedAddress;
-                         [self performSegueWithIdentifier: @"showResults" sender: selectedItem];
-                         [self dismissSearchControllerWhileStayingActive];
-                         [self.searchDisplayController.searchResultsTableView deselectRowAtIndexPath:indexPath animated:NO];
-                     }
-                 }
-             }];
-//
+            NSString *addressForJson = [AddressGeocoderFactory translateAddresstoUrl:addressString];
+
+            NSMutableDictionary *geocode = [AddressGeocoderFactory translateUrlToGeocodedObject:addressForJson];
+            selectedItem.searchQuery   = place.name;
+             CLLocation *location = [[CLLocation alloc] initWithLatitude:[[geocode objectForKey:@"latitude"] doubleValue] longitude:[[geocode objectForKey:@"longitude"] doubleValue]];
+            selectedItem.lati = location.coordinate.latitude;
+            selectedItem.longi = location.coordinate.longitude;
+            selectedItem.position = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+           selectedItem.address = [geocode objectForKey:@"address"];
+            [self performSegueWithIdentifier: @"showResults" sender: selectedItem];
+            [self dismissSearchControllerWhileStayingActive];
+            [self.searchDisplayController.searchResultsTableView deselectRowAtIndexPath:indexPath animated:NO];
         }
     }];
 };

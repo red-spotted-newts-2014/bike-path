@@ -51,7 +51,6 @@
         } else {
             NSString *addressString = placeDictionary[@"formatted_address"];
             [[self geocoder] geocodeAddressString:addressString completionHandler:^(NSArray *placemarks, NSError *error) {
-                NSLog(@"address String: %@", addressString);
                 if (error) {
                     block(nil, nil, error);
                 } else {
