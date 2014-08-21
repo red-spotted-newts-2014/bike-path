@@ -82,7 +82,7 @@
 - (void)currentUserLocation {
     locationManager = [[CLLocationManager alloc] init];
     locationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
-    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [locationManager startUpdatingLocation];
 }
 
@@ -113,13 +113,12 @@
     
     NSString *destinationName;
     
-    if ([[self.item.searchQuery componentsSeparatedByString:@","] objectAtIndex:0])
-    {
+    if ([[self.item.searchQuery componentsSeparatedByString:@","] objectAtIndex:0]) {
         destinationName = [[self.item.searchQuery componentsSeparatedByString:@","] objectAtIndex:0];
     } else {
         destinationName = self.item.searchQuery;
     };
-//    NSLog(destinationName);
+
     GMSMarker *endPoint = [GMSMarkerFactory createGMSMarker:createEndLocation
                                                     mapView:mapView_
                                                       title:destinationName

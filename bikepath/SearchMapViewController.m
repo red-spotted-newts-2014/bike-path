@@ -18,16 +18,36 @@
 #import "ErrorMessage.h"
 #import "GMSMarkerFactory.h"
 
-@interface SearchMapViewController ()
+@interface SearchMapViewController () {
+    GMSMapView *mapView_;
+    CLLocationManager *locationManager;
+}
 
 @end
 
 @implementation SearchMapViewController
 
-@synthesize mapView;
+- (void)viewWillAppear:(BOOL)animated {
+    [self.mapView addObserver:self forKeyPath:@"myLocation" options:0 context:nil];
+}
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (void)dealloc {
+    [self.mapView removeObserver:self forKeyPath:@"myLocation"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if([keyPath isEqualToString:@"myLocation"]) {
+        CLLocation *location = [object myLocation];
+        
+        CLLocationCoordinate2D target =
+        CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+        
+        [self.mapView animateToLocation:target];
+        [self.mapView animateToZoom:16];
+    }
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         searchQuery = [[SPGooglePlacesAutocompleteQuery alloc] initWithApiKey:@"AIzaSyAxaqfMyyc-WSrvsWP_jF2IUaTZVjkMlFo"];
@@ -45,11 +65,7 @@
     
     AppDelegate *appDel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDel loadCitiBikeData];
-  
-    GMSCameraPosition *startLocation = [GMSCameraPosition cameraWithLatitude:40.706638
-                                                         longitude:-74.009070
-                                                              zoom:16];
-    [self.mapView setCamera:startLocation];
+    
     self.mapView.mapType                   = kGMSTypeNormal;
     self.mapView.settings.zoomGestures     = YES;
     self.mapView.myLocationEnabled         = YES;

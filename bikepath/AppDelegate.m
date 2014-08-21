@@ -52,6 +52,7 @@
 #pragma mark - UIFormatting
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+//    CLLocationManager *manager = [[CLLocationManager alloc] init];
     // background color of navigation bar
     UIColor * color = [UIColor colorWithRed:50/255.0f green:115/255.0f blue:233/255.0f alpha:1.0f];
     [[UINavigationBar appearance] setBarTintColor:color];
