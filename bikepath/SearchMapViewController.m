@@ -114,16 +114,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SPGooglePlacesAutocompletePlace *place = [self placeAtIndexPath:indexPath];
+    NSLog(@"place.name: %@", place.name);
     [place resolveToPlacemark:^(CLPlacemark *placemark, NSString *addressString, NSError *error) {
         if (error) {
             [ErrorMessage renderErrorMessage:@"Could not map selected place" cancelButtonTitle:@"OK" error:error];
         } else if (placemark) {
             SearchItem *selectedItem   = [[SearchItem alloc] init];
-            NSString *addressForJson = [AddressGeocoderFactory translateAddresstoUrl:addressString];
-            
+            NSString *addressForJson = [[NSString alloc] init];
+            NSArray *addressStringSplit = [addressString componentsSeparatedByString:@" "];
+            if (addressStringSplit.count < 3) {
+                addressForJson = [AddressGeocoderFactory translateAddresstoUrl:place.name];
+            } else {
+                addressForJson = [AddressGeocoderFactory translateAddresstoUrl:addressString];
+            }
             NSMutableDictionary *geocode = [AddressGeocoderFactory translateUrlToGeocodedObject:addressForJson];
             selectedItem.searchQuery   = place.name;
-            NSLog(@"name: %@", place.name);
             CLLocation *location = [[CLLocation alloc] initWithLatitude:[[geocode objectForKey:@"latitude"] doubleValue] longitude:[[geocode objectForKey:@"longitude"] doubleValue]];
             selectedItem.lati = location.coordinate.latitude;
             selectedItem.longi = location.coordinate.longitude;

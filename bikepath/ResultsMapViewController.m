@@ -28,11 +28,6 @@
 
 - (IBAction)unwindToSearchPage:(UIStoryboardSegue *)segue {}
 
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
-
 - (NSString *)deviceLocation {
     return [NSString stringWithFormat:@"latitude: %f longitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude];
 }

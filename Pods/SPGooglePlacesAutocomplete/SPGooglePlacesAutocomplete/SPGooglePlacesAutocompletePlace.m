@@ -50,12 +50,12 @@
             block(nil, nil, error);
         } else {
             NSString *addressString = placeDictionary[@"formatted_address"];
+            
             [[self geocoder] geocodeAddressString:addressString completionHandler:^(NSArray *placemarks, NSError *error) {
                 if (error) {
                     block(nil, nil, error);
                 } else {
                     CLPlacemark *placemark = [placemarks onlyObject];
-//                    NSString *address = addressString;
                     block(placemark, addressString, error);
                 }
             }];
@@ -65,7 +65,9 @@
 
 - (void)resolveGecodePlaceToPlacemark:(SPGooglePlacesPlacemarkResultBlock)block {
     [[self geocoder] geocodeAddressString:self.name completionHandler:^(NSArray *placemarks, NSError *error) {
+        
         NSLog(@"self.name: %@", self.name);
+        
         if (error) {
             block(nil, nil, error);
         } else {
