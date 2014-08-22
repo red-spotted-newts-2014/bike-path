@@ -35,7 +35,7 @@
     if ([numberOfBikes integerValue] > 3) {
         marker.icon    = [UIImage imageNamed:@"bicycleGreen"];
         marker.snippet = [NSString stringWithFormat:@"%@: %@", availableSnippet, numberOfBikes];
-    } else if (numberOfBikes > 0) {
+    } else if ([numberOfBikes integerValue] > 0) {
         marker.icon    = [UIImage imageNamed:@"bicycleYellow"];
         marker.snippet = [NSString stringWithFormat:@"%@: %@", availableSnippet, numberOfBikes];
     } else {

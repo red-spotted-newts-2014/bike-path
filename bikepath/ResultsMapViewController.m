@@ -30,7 +30,8 @@
 - (IBAction)unwindToSearchPage:(UIStoryboardSegue *)segue {}
 
 - (NSString *)deviceLocation {
-    return [NSString stringWithFormat:@"latitude: %f longitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude];
+    return [NSString stringWithFormat:@"latitude: %f longitude: %f",
+            locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude];
 }
 
 -(void)buttonPressed {

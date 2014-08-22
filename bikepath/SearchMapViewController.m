@@ -39,8 +39,8 @@
     if([keyPath isEqualToString:@"myLocation"]) {
         CLLocation *location = [object myLocation];
         
-        CLLocationCoordinate2D target =
-        CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+        CLLocationCoordinate2D target = CLLocationCoordinate2DMake(location.coordinate.latitude,
+                                                                   location.coordinate.longitude);
         
         [self.mapView animateToLocation:target];
         [self.mapView animateToZoom:16];
