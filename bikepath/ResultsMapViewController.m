@@ -127,55 +127,55 @@
 
     NSArray *stations = appDel.stationJSON;
 
-             NSDictionary *closestStation = [StationFinder findClosestStation:stations location:currentLocation];
-             CLLocationCoordinate2D closestStationLocation = CLLocationCoordinate2DMake(
-                 [[closestStation objectForKey:@"latitude"] doubleValue],
-                 [[closestStation objectForKey:@"longitude"] doubleValue]);
+    NSDictionary *closestStation = [StationFinder findClosestStation:stations location:currentLocation];
+    CLLocationCoordinate2D closestStationLocation = CLLocationCoordinate2DMake(
+        [[closestStation objectForKey:@"latitude"] doubleValue],
+        [[closestStation objectForKey:@"longitude"] doubleValue]);
 
-             NSNumber *numberOfBikes = @([[closestStation objectForKey:@"availableBikes"] intValue]);
+    NSNumber *numberOfBikes = @([[closestStation objectForKey:@"availableBikes"] intValue]);
 
-             GMSMarker *startStation  = [GMSMarkerFactory createGMSMarkerForStation:closestStationLocation
-                                                                  mapView:mapView_
-                                                                    title:[closestStation objectForKey:@"stationName"]
-                                                         availableSnippet:@"Bicycles available"
-                                                       unavailableSnippet:@"No bicycles available at this location."
-                                                            numberOfBikes:numberOfBikes];
-             [waypoints_ addObject:startStation];
+    GMSMarker *startStation  = [GMSMarkerFactory createGMSMarkerForStation:closestStationLocation
+                                                      mapView:mapView_
+                                                        title:[closestStation objectForKey:@"stationName"]
+                                             availableSnippet:@"Bicycles available"
+                                           unavailableSnippet:@"No bicycles available at this location."
+                                                numberOfBikes:numberOfBikes];
+    [waypoints_ addObject:startStation];
 
-             CLLocation *endLocation = [[CLLocation alloc] initWithLatitude:createEndLocation.latitude
-                                                                  longitude:createEndLocation.longitude];
+    CLLocation *endLocation = [[CLLocation alloc] initWithLatitude:createEndLocation.latitude
+                                                      longitude:createEndLocation.longitude];
 
-             NSDictionary *closestEndStation = [StationFinder findClosestStation:stations location:endLocation];
-             CLLocationCoordinate2D closestEndStationLocation =
-             CLLocationCoordinate2DMake([[closestEndStation objectForKey:@"latitude"] doubleValue],
-                                        [[closestEndStation objectForKey:@"longitude"] doubleValue]);
+    NSDictionary *closestEndStation = [StationFinder findClosestStation:stations location:endLocation];
+    CLLocationCoordinate2D closestEndStationLocation =
+    CLLocationCoordinate2DMake([[closestEndStation objectForKey:@"latitude"] doubleValue],
+                            [[closestEndStation objectForKey:@"longitude"] doubleValue]);
 
-             NSNumber *availableDocks = @([[closestStation objectForKey:@"availableDocks"] intValue]);
+    NSNumber *availableDocks = @([[closestStation objectForKey:@"availableDocks"] intValue]);
 
-             GMSMarker *endStation  = [GMSMarkerFactory createGMSMarkerForStation:closestEndStationLocation
-                                                                mapView:mapView_
-                                                                  title:[closestEndStation objectForKey:@"stationName"]
-                                                       availableSnippet:@"Docks available"
-                                                     unavailableSnippet:@"No docks available at this location."
-                                                          numberOfBikes:availableDocks];
-             [waypoints_ addObject:endStation];
+    GMSMarker *endStation  = [GMSMarkerFactory createGMSMarkerForStation:closestEndStationLocation
+                                                    mapView:mapView_
+                                                      title:[closestEndStation objectForKey:@"stationName"]
+                                           availableSnippet:@"Docks available"
+                                         unavailableSnippet:@"No docks available at this location."
+                                              numberOfBikes:availableDocks];
+    [waypoints_ addObject:endStation];
 
-             NSMutableArray *markerStrings = [[NSMutableArray alloc] init];
-             for(GMSMarker *waypoint in waypoints_){
-                 [markerStrings addObject:[[NSString alloc] initWithFormat:@"%f,%f", waypoint.position.latitude, waypoint.position.longitude]];
-             }
+    NSMutableArray *markerStrings = [[NSMutableArray alloc] init];
+    for(GMSMarker *waypoint in waypoints_){
+     [markerStrings addObject:[[NSString alloc] initWithFormat:@"%f,%f", waypoint.position.latitude, waypoint.position.longitude]];
+    }
 
-             NSArray *keys = [NSArray arrayWithObjects: @"waypoints", nil];
-             NSArray *parameters = [NSArray arrayWithObjects: markerStrings, nil];
-             NSDictionary *query = [NSDictionary dictionaryWithObjects:parameters
-                                                               forKeys:keys];
+    NSArray *keys = [NSArray arrayWithObjects: @"waypoints", nil];
+    NSArray *parameters = [NSArray arrayWithObjects: markerStrings, nil];
+    NSDictionary *query = [NSDictionary dictionaryWithObjects:parameters
+                                                   forKeys:keys];
 
-             MDDirectionService *mds=[[MDDirectionService alloc] init];
-             SEL selector = @selector(addDirections:);
-             [mds setDirectionsQuery:query
-                        withSelector:selector
-                        withDelegate:self];
-         }
+    MDDirectionService *mds=[[MDDirectionService alloc] init];
+    SEL selector = @selector(addDirections:);
+    [mds setDirectionsQuery:query
+            withSelector:selector
+            withDelegate:self];
+}
 
 - (void)addDirections:(NSDictionary *)json {
     NSDictionary *routes;
